@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os.path
 from pathlib import Path
+from django.contrib.messages import constants as messages
+#import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-t8qyrq##g^%af4zd@tb262w^x3xngm1072z3&%3js_45l&5(0u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,18 +78,26 @@ WSGI_APPLICATION = 'Site_Devlittlegirls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+# DATABASES = {
+#     'default': {
         #'ENGINE': 'django.db.backends.mysql',
         # Como já tenho um mysql que uso no apache, a linha acima não funcionou, precisei alterar
-        'ENGINE': 'mysql.connector.django',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'NAME': 'projeto_devlittlegirls',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+#         'ENGINE': 'mysql.connector.django',
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+#         'NAME': 'projeto_devlittlegirls',
+#         'USER': 'root',
+#         'PASSWORD': 'root',
+#         'HOST': 'localhost',
 #localhost Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+#         'PORT': '3306',
+#     }
+# }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -114,11 +124,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
+"""
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_TZ = True
+"""
+
+LANGUAGE_CODE = 'pt-br'
+
+TIME_ZONE = 'America/Sao_Paulo'
+
+USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -133,7 +155,40 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+LOGGING = {
+'version': 1,
+'disable_existing_loggers': False,
+'formatters': {
+'simple': {
+'format': 'Mensagem: %(levelname)s %(message)s'
+},
+},
+'handlers': {
+'console': {
+'level': 'DEBUG',
+'class': 'logging.StreamHandler',
+'formatter': 'simple'
+},
+},
+'loggers': {
+'Site_Devlittlegirls': {
+'handlers': ['console'],
+'level': 'DEBUG',
+'propagate': True,
+},
+'Devlittlegirls_app': {
+'handlers': ['console'],
+'level': 'DEBUG',
+'propagate': True,
+},
+},
+}
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Configure Django App for Heroku.
+# django_heroku.settings(locals())

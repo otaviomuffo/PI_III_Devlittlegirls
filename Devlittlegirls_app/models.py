@@ -8,6 +8,7 @@
 from django.db import models
 
 
+"""
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -120,16 +121,17 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-
+"""
 
 class Site(models.Model):
+    codsite = models.AutoField(primary_key=True)
     nome_site = models.CharField(max_length=100, unique=True)
     home_page = models.URLField(max_length=100)
     descricao = models.TextField(max_length=600)
     logo = models.ImageField(upload_to='images')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'site'
 
     def __str__(self):
@@ -137,14 +139,28 @@ class Site(models.Model):
 
 
 class Aluno(models.Model):
+    codaluno = models.AutoField(primary_key=True)
     nome_aluno = models.CharField(max_length=45, unique=True)
+    curso_aluno = models.CharField(max_length=45)
     biografia = models.TextField(max_length=5000)
     linkedin = models.URLField(max_length=100)
     foto = models.ImageField(upload_to='images')
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'aluno'
 
     def __str__(self):
         return self.nome_aluno
+        
+
+class Forum(models.Model):
+    CodForumItem = models.AutoField(primary_key=True)
+    DescForum = models.CharField(max_length=120)
+    
+    class Meta:
+        managed = True
+        db_table = 'Forum'
+        
+    def __str__(self):
+        return self.DescForum

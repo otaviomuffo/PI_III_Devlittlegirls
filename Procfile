@@ -1,1 +1,1 @@
-web: gunicorn coletaseletiva.wsgi
+web: gunicorn Site_Devlittlegirls.wsgi

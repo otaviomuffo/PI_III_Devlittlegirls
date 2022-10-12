@@ -7,7 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
+"""
 class Aluno(models.Model):
     nome_aluno = models.CharField(max_length=45)
     biografia = models.CharField(max_length=5000)
@@ -130,7 +130,7 @@ class DjangoSession(models.Model):
     class Meta:
         managed = False
         db_table = 'django_session'
-
+"""
 
 class Site(models.Model):
     nome_site = models.CharField(max_length=100)
@@ -138,5 +138,31 @@ class Site(models.Model):
     descricao = models.CharField(max_length=600)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'site'
+
+class Aluno(models.Model):
+    nome_aluno = models.CharField(max_length=45, unique=True)
+    curso_aluno = models.CharField(max_length=45)
+    biografia = models.TextField(max_length=5000)
+    linkedin = models.URLField(max_length=100)
+    foto = models.ImageField(upload_to='images')
+
+    class Meta:
+        managed = True
+        db_table = 'aluno'
+
+    def __str__(self):
+        return self.nome_aluno
+        
+
+class Forum(models.Model):
+    CodForumItem = models.AutoField(primary_key=True)
+    DescForum = models.CharField(max_length=120)
+    
+    class Meta:
+        managed = True
+        db_table = 'Forum'
+        
+    def __str__(self):
+        return self.DescForum
