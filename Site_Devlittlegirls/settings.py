@@ -78,21 +78,35 @@ WSGI_APPLICATION = 'Site_Devlittlegirls.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
+"""
+ DATABASES = {
+     'default': {
         #'ENGINE': 'django.db.backends.mysql',
         # Como já tenho um mysql que uso no apache, a linha acima não funcionou, precisei alterar
-#         'ENGINE': 'mysql.connector.django',
-#         # 'NAME': BASE_DIR / 'db.sqlite3',
-#         'NAME': 'projeto_devlittlegirls',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': 'localhost',
-#localhost Or an IP Address that your DB is hosted on
-#         'PORT': '3306',
-#     }
-# }
+         'ENGINE': 'mysql.connector.django',
+         # 'NAME': BASE_DIR / 'db.sqlite3',
+         'NAME': 'projeto_devlittlegirls',
+         'USER': 'root',
+         'PASSWORD': 'root',
+         'HOST': 'localhost',
+localhost Or an IP Address that your DB is hosted on
+         'PORT': '3306',
+     }
+ }
+"""
 
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myinner_db',
+        'USER': 'univence',
+        'PASSWORD': 'Univesp@2021',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+"""
 
 DATABASES = {
     'default': {
@@ -100,6 +114,7 @@ DATABASES = {
         'NAME': 'mydatabase',
     }
 }
+
 
 
 # Password validation
