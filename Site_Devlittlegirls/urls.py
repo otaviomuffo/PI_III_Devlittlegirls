@@ -22,4 +22,5 @@ from django.urls.conf import include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('Home/', include('Devlittlegirls_app.urls')), #nome que vai aparecer na barra internet
+    path('', include('Devlittlegirls_app.urls')), #nome que vai aparecer na barra internet
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
